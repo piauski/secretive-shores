@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://4e20eam41pd8"]
+
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="1_i0gn1"]
+[ext_resource type="Texture2D" uid="uid://dkmhxktva5il2" path="res://assets/totems/air.png" id="2_l5hvv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdyhj"]
+shader = ExtResource("1_i0gn1")
+shader_parameter/width = 2
+shader_parameter/outline_color = Color(0.84, 0.67648, 0.2268, 1)
+shader_parameter/flickering_speed = 1.0
+shader_parameter/minimal_flickering_alpha = null
+
+[node name="Totem" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rdyhj")
+scale = Vector2(4, 4)
+texture = ExtResource("2_l5hvv")

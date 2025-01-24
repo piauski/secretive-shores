@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpo8vooou107k"]
+
+[ext_resource type="Script" path="res://src/tiles.gd" id="1_w7du5"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_w7du5")

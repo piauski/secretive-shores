@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbfepm75hksy1"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_ca4f1"]
+[ext_resource type="Script" path="res://src/island.gd" id="1_kri13"]
+[ext_resource type="Texture2D" uid="uid://clx76ip6pwboi" path="res://assets/island/tile_bg.png" id="2_antd8"]
+[ext_resource type="Texture2D" uid="uid://b73qfrqs4mvci" path="res://assets/player/diver.png" id="2_y18hw"]
+[ext_resource type="Texture2D" uid="uid://c804a632eh6sb" path="res://assets/totems/water.png" id="3_mi7t6"]
+[ext_resource type="Shader" path="res://shaders/grayscale.gdshader" id="3_oca5m"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_cxsfd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_halv5"]
+shader = ExtResource("3_oca5m")
+shader_parameter/desaturate_amount = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vppcd"]
+shader = ExtResource("4_cxsfd")
+shader_parameter/width = 1
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/flickering_speed = 0.0
+shader_parameter/minimal_flickering_alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21pby"]
+shader = ExtResource("4_cxsfd")
+shader_parameter/width = 1
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/flickering_speed = null
+shader_parameter/minimal_flickering_alpha = null
+
+[node name="Island" type="Node2D" groups=["Island"]]
+script = ExtResource("1_kri13")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.8557, 0.855426, 0.86151, 1)
+position = Vector2(0, -6.58035e-06)
+scale = Vector2(2.59375, 2.59375)
+texture = ExtResource("2_antd8")
+
+[node name="Art" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_halv5")
+position = Vector2(0, -13)
+texture = ExtResource("1_ca4f1")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -68.0
+offset_top = 53.0
+offset_right = 71.0
+offset_bottom = 78.0
+text = "Island Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerIcon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vppcd")
+position = Vector2(-40, 25)
+texture = ExtResource("2_y18hw")
+
+[node name="TotemIcon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_21pby")
+position = Vector2(43, 25)
+texture = ExtResource("3_mi7t6")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -83.0
+offset_top = -84.0
+offset_right = 83.0
+offset_bottom = 83.0
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
