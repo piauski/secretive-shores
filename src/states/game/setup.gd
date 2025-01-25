@@ -9,9 +9,9 @@ func enter() -> void:
 	players.spawn_players(board)
 	
 	# Flood 6 random tiles
-	var children = board.get_islands()
-	children.shuffle()
+	var islands = board.get_islands()
+	islands.shuffle()
 	for i in range(6):
-		children[i].flooded = true
+		board.flood(islands[i], true)
 		
 	transition("turn")

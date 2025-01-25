@@ -28,6 +28,8 @@ const diagonal_offsets: Array = [
 	[1, 1]		# Bottom right
 ]
 
+var flood_deck: Array[Island] = []
+
 func count_island_tiles() -> int:
 	var count = 0
 	for row in island_shape:
@@ -129,4 +131,12 @@ func get_adjacent_tiles_for_player(player: Player):
 		tile.scale = Vector2(1.5,1.5)
 	
 	return adjacent_tiles
-	
+
+func flood(island: Island, state: bool):
+	if island.flooded and state:
+		print("Island removed")
+		island.queue_free()
+	else:
+		island.flooded = state
+		if state:
+			flood_deck.append(island)

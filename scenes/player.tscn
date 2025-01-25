@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://big6e5accap0q"]
+
+[ext_resource type="Script" path="res://src/player.gd" id="1_cohho"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_1fcl0"]
+[ext_resource type="Texture2D" uid="uid://b73qfrqs4mvci" path="res://assets/player/diver.png" id="3_18r0f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5c4b"]
+shader = ExtResource("2_1fcl0")
+shader_parameter/width = 1
+shader_parameter/outline_color = Color(0.930913, 0.787376, 0.536072, 1)
+shader_parameter/flickering_speed = 1.0
+shader_parameter/minimal_flickering_alpha = null
+
+[node name="Player" type="Node2D" groups=["Player"]]
+script = ExtResource("1_cohho")
+
+[node name="Sprite" type="Sprite2D" parent="." groups=["Island", "Player"]]
+material = SubResource("ShaderMaterial_p5c4b")
+scale = Vector2(2, 2)
+texture = ExtResource("3_18r0f")

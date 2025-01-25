@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5qnn7aelbitc"]
+[gd_scene load_steps=12 format=3 uid="uid://b5qnn7aelbitc"]
 
 [ext_resource type="Script" path="res://src/island.gd" id="1_j6xqy"]
+[ext_resource type="Shader" path="res://shaders/grayscale.gdshader" id="3_6nonv"]
 [ext_resource type="Texture2D" uid="uid://clx76ip6pwboi" path="res://assets/island/tile_bg.png" id="3_sl4kl"]
 [ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="4_fa1s2"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="5_mj7la"]
 [ext_resource type="Texture2D" uid="uid://b73qfrqs4mvci" path="res://assets/player/diver.png" id="6_ihvcw"]
 [ext_resource type="Texture2D" uid="uid://c804a632eh6sb" path="res://assets/totem/water.png" id="7_qq88u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qvbp"]
+shader = ExtResource("3_6nonv")
+shader_parameter/desaturate_amount = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6wq0"]
 shader = ExtResource("5_mj7la")
@@ -33,6 +38,7 @@ scale = Vector2(2.6, 2.6)
 texture = ExtResource("3_sl4kl")
 
 [node name="IslandImage" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8qvbp")
 position = Vector2(0, -14)
 texture = ExtResource("4_fa1s2")
 

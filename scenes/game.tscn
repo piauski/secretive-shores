@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqxacn83odu47"]
+
+[ext_resource type="Script" path="res://src/camera_2d.gd" id="2_6e7hi"]
+[ext_resource type="PackedScene" uid="uid://cmakmivbp7n1k" path="res://scenes/board.tscn" id="2_offwo"]
+[ext_resource type="PackedScene" uid="uid://ctf80e7y0m1x2" path="res://scenes/players.tscn" id="4_vmute"]
+[ext_resource type="Script" path="res://src/states/state_machine.gd" id="5_ospuk"]
+[ext_resource type="Script" path="res://src/states/game/setup.gd" id="6_y4vx5"]
+[ext_resource type="Script" path="res://src/states/game/turn.gd" id="7_6v41q"]
+[ext_resource type="Script" path="res://src/states/game/turn_wait.gd" id="7_is55e"]
+[ext_resource type="Texture2D" uid="uid://cgcvb1csnh6ih" path="res://assets/player/navigator.png" id="8_18cu6"]
+[ext_resource type="Script" path="res://src/hud.gd" id="8_q3yuw"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("2_6e7hi")
+
+[node name="Board" parent="." instance=ExtResource("2_offwo")]
+
+[node name="Players" parent="." instance=ExtResource("4_vmute")]
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_ospuk")
+initial_state = NodePath("setup")
+
+[node name="setup" type="Node" parent="State Machine" node_paths=PackedStringArray("board", "players")]
+script = ExtResource("6_y4vx5")
+board = NodePath("../../Board")
+players = NodePath("../../Players")
+
+[node name="turn" type="Node" parent="State Machine" node_paths=PackedStringArray("board", "players")]
+script = ExtResource("7_6v41q")
+board = NodePath("../../Board")
+players = NodePath("../../Players")
+
+[node name="turn_wait" type="Node" parent="State Machine" node_paths=PackedStringArray("board", "players")]
+script = ExtResource("7_is55e")
+board = NodePath("../../Board")
+players = NodePath("../../Players")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("board", "players")]
+script = ExtResource("8_q3yuw")
+board = NodePath("../Board")
+players = NodePath("../Players")
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TurnIndicator" type="HBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_right = 279.0
+offset_bottom = 40.0
+
+[node name="PlayerImage" type="TextureRect" parent="CanvasLayer/HUD/TurnIndicator"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("8_18cu6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="PlayerLabel" type="RichTextLabel" parent="CanvasLayer/HUD/TurnIndicator"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Player's Turn"
+fit_content = true

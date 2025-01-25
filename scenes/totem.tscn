@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://4e20eam41pd8"]
 
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="1_1us6u"]
-[ext_resource type="Script" path="res://scenes/totem.gd" id="1_na00s"]
+[ext_resource type="Script" path="res://src/totem.gd" id="1_na00s"]
 [ext_resource type="Texture2D" uid="uid://dkmhxktva5il2" path="res://assets/totem/air.png" id="2_275j0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdyhj"]
