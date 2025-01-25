@@ -5,13 +5,27 @@ class_name Board
 @export var island_scene: PackedScene = preload("res://scenes/island.tscn")
 @export var totem_scene: PackedScene = preload("res://scenes/totem.tscn")
 
-const island_shape: Array = [
+var island_shape: Array = [
 	[0, 0, 1, 1, 0, 0],
 	[0, 1, 1, 1, 1, 0],
 	[1, 1, 1, 1, 1, 1],
 	[1, 1, 1, 1, 1, 1],
 	[0, 1, 1, 1, 1, 0],
 	[0, 0, 1, 1, 0, 0],
+]
+
+const adjacent_offsets: Array = [
+	[-1, 0], 	# Top middle
+	[0, -1], 	# Middle left
+	[0, 1], 	# Middle right
+	[1, 0], 	# Bottom middle
+]
+
+const diagonal_offsets: Array = [
+	[-1, -1],	# Top left
+	[-1, 1], 	# Top right
+	[1, -1], 	# Bottom left
+	[1, 1]		# Bottom right
 ]
 
 func count_island_tiles() -> int:
@@ -61,6 +75,8 @@ func generate_island() -> void:
 				# Place island here
 				var island = islands[island_idx]
 				island.position = Vector2(col_idx * 200, row_idx * 200)
+				island.row = row_idx
+				island.col = col_idx
 				island_idx += 1
 
 	# Spawn totems
@@ -86,3 +102,31 @@ func generate_island() -> void:
 		
 func get_spawn_tiles_for_class(clazz: Classes.Class) -> Array[Island]:
 	return get_islands().filter(func(island: Island): return island.spawned_player == clazz)
+	
+func get_island_by_row_col(row: int, col: int) -> Island:
+	return get_islands().filter(func(island: Island): return island.row == row and island.col == col)[0]
+
+func get_adjacent_tiles_for_player(player: Player):
+	var adjacent_tiles: Array[Island] = []
+	var island = player.current_tile
+	print("Island idx ", island.row, " ", island.col)
+	
+	var offsets = adjacent_offsets.duplicate()
+	print("SPECIAL", player.special_action, Classes.SpecialAction.MOVE_SHORE_UP_DIAG)
+	if player.special_action == Classes.SpecialAction.MOVE_SHORE_UP_DIAG:
+		for offset in diagonal_offsets:
+			offsets.append(offset)
+		
+	for offset in offsets:
+		var adj_row = island.row + offset[0]
+		var adj_col = island.col + offset[1]
+		if (adj_row >= 0 and adj_row < island_shape.size() and
+			adj_col >= 0 and adj_col < island_shape[0].size()):
+			if island_shape[adj_row][adj_col] > 0:
+				adjacent_tiles.append(get_island_by_row_col(adj_row, adj_col))
+	
+	for tile in adjacent_tiles:
+		tile.scale = Vector2(1.5,1.5)
+	
+	return adjacent_tiles
+	

@@ -16,6 +16,7 @@ class_name Player
 		position = current_tile.position + (Vector2(randf() - 0.5, randf() - 0.5) * 50)
 
 @export var clazz: Classes.Class = Classes.Class.NONE
+@export var special_action: Classes.SpecialAction = Classes.SpecialAction.NONE
 @export var tile_pos: Vector2
 
 var current_player = false
@@ -23,9 +24,5 @@ var current_player = false
 func load_resource(resource: PlayerResource):
 	set_name(resource.name)
 	clazz = resource.clazz
+	special_action = resource.special_action
 	sprite.texture = resource.image
-
-	
-func get_adjacent_tiles() -> Array[Island]:
-	return [current_tile]
-	

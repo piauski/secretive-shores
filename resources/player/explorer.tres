@@ -7,4 +7,5 @@
 script = ExtResource("2_lpgek")
 name = "Explorer"
 clazz = 5
+special_action = 5
 image = ExtResource("1_gvls4")

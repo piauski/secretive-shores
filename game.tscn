@@ -39,11 +39,10 @@ script = ExtResource("7_is55e")
 board = NodePath("../../Board")
 players = NodePath("../../Players")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("board", "players", "game_state_turn")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("board", "players")]
 script = ExtResource("8_q3yuw")
 board = NodePath("../Board")
 players = NodePath("../Players")
-game_state_turn = NodePath("../State Machine/turn")
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3

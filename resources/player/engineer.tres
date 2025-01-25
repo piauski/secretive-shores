@@ -7,4 +7,5 @@
 script = ExtResource("2_ogc25")
 name = "Engineer"
 clazz = 2
+special_action = 2
 image = ExtResource("1_ybkbr")

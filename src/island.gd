@@ -14,6 +14,9 @@ var always_spawn: bool = false
 var spawned_player: Classes.Class = Classes.Class.NONE
 var spawned_totem: Totems.Totem = Totems.Totem.NONE
 
+var row: int = 0
+var col: int = 0
+
 @export var resource: IslandResource:
 	set(value):
 		resource = value
