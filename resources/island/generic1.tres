@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://drro71d2xyoe7"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_j2mtu"]
+[ext_resource type="Script" path="res://src/resources/island.gd" id="1_tctl7"]
+
+[resource]
+script = ExtResource("1_tctl7")
+name = "Moonlit Cove"
+type = 1
+image = ExtResource("1_j2mtu")
+flooded = false
+always_spawn = false
+spawned_player = 0
+spawned_totem = 0

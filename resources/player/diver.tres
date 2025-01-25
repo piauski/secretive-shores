@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerResource" load_steps=3 format=3 uid="uid://diin58rvj8smx"]
+
+[ext_resource type="Texture2D" uid="uid://b73qfrqs4mvci" path="res://assets/player/diver.png" id="1_t62s8"]
+[ext_resource type="Script" path="res://src/resources/player.gd" id="2_dqhio"]
+
+[resource]
+script = ExtResource("2_dqhio")
+name = "Diver"
+clazz = 1
+image = ExtResource("1_t62s8")

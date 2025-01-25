@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://dsyti838sj3aw"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_sxk32"]
+[ext_resource type="Script" path="res://src/resources/island.gd" id="2_d321n"]
+
+[resource]
+script = ExtResource("2_d321n")
+name = "Abandoned Settlement"
+type = 1
+image = ExtResource("1_sxk32")
+flooded = false
+always_spawn = false
+spawned_player = 0
+spawned_totem = 0

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://cm843epsadbm3"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_188qo"]
+[ext_resource type="Script" path="res://src/resources/island.gd" id="2_12amp"]
+
+[resource]
+script = ExtResource("2_12amp")
+name = "Raging Tides"
+type = 1
+image = ExtResource("1_188qo")
+flooded = false
+always_spawn = true
+spawned_player = 0
+spawned_totem = 2

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://c4wngopdvliih"]
+
+[ext_resource type="Script" path="res://src/resources/island.gd" id="1_2pww4"]
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_i8r0q"]
+
+[resource]
+script = ExtResource("1_2pww4")
+name = "Hidden Grotto"
+type = 1
+image = ExtResource("1_i8r0q")
+flooded = false
+always_spawn = true
+spawned_player = 1
+spawned_totem = 0

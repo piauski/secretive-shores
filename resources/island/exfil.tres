@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://c0glrba6j37rp"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_gm3i0"]
+[ext_resource type="Script" path="res://src/resources/island.gd" id="1_oaa6w"]
+
+[resource]
+script = ExtResource("1_oaa6w")
+name = "Renegade's Retreat"
+type = 2
+image = ExtResource("1_gm3i0")
+flooded = false
+always_spawn = true
+spawned_player = 0
+spawned_totem = 0

@@ -11,41 +11,37 @@ class_name Island
 var type: Tiles.Tile = Tiles.Tile.NONE
 var flooded: bool = false
 var always_spawn: bool = false
+var spawned_player: Classes.Class = Classes.Class.NONE
+var spawned_totem: Totems.Totem = Totems.Totem.NONE
 
 @export var resource: IslandResource:
 	set(value):
 		resource = value
+		load_resource(resource)
 		
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	load_resource()
-	
-
-func load_resource():
+func load_resource(resource: IslandResource):
 	set_name(resource.name)
-	name_label.text = name
+	name_label.text = resource.name
 	type = resource.type
 	island_image.texture = resource.image
 	flooded = resource.flooded
 	always_spawn = resource.always_spawn
+	spawned_player = resource.spawned_player
+	spawned_totem = resource.spawned_totem
 
 	# Player Icon
 	if resource.spawned_player != Classes.Class.NONE:
 		player_icon.visible = true
-		player_icon.texture = load("res://assets/player/%s.png" % Classes.Class.keys()[resource.spawned_player].to_lower())
+		player_icon.texture = load("res://resources/player/%s.tres" % Classes.Class.keys()[resource.spawned_player].to_lower()).image
 	else:
 		player_icon.visible = false
 		
 	# Totem Icon
 	if resource.spawned_totem != Totems.Totem.NONE:
 		totem_icon.visible = true
-		totem_icon.texture = load("res://assets/totem/%s.png" % Totems.Totem.keys()[resource.spawned_totem].to_lower())
+		totem_icon.texture = load("res://resources/totem/%s.tres" % Totems.Totem.keys()[resource.spawned_totem].to_lower()).image
 	else:
 		totem_icon.visible = false
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

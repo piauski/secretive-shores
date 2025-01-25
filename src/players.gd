@@ -1,24 +1,26 @@
 extends Node2D
 class_name Players
 
-
 @export var PLAYER_COUNT = 4
 @export var player_scene: PackedScene = preload("res://player.tscn")
+@export var player_resources_path: String = "res://resources/player/"
 
 var current_player: Player
 
 var players: Array = []
 
-func spawn(classes, board):
-	for clazz in classes:
-		var player_instance = player_scene.instantiate()
-		add_child(player_instance)
-		player_instance.clazz = clazz
-		player_instance.set_name(Classes.class_data[clazz].name)
-		player_instance.current_tile = board.get_spawn_tile_for_class(clazz)
-		player_instance.position = player_instance.current_tile.position + (Vector2(randf() - 0.5, randf() - 0.5) * 50)
-		
-		players.push_back(player_instance)
+func spawn_players(board: Board):
+	var player_resources = Util.load_all_resources_in_dir(player_resources_path) as Array[PlayerResource]
+	player_resources.shuffle()
+	player_resources.resize(PLAYER_COUNT)
+	for resource in player_resources:
+		var new_player = player_scene.instantiate() as Player
+		add_child(new_player)
+		players.append(new_player)
+		new_player.resource = resource
+		# This assumes only one spawn tile per class.
+		# FIXME: If multiple spawn tiles are allowed, change this.
+		new_player.current_tile = board.get_spawn_tiles_for_class(new_player.clazz)[0]
 
 func get_players():
 	return players

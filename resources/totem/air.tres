@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TotemResource" load_steps=3 format=3 uid="uid://c26xeue03cln5"]
+
+[ext_resource type="Texture2D" uid="uid://dkmhxktva5il2" path="res://assets/totem/air.png" id="1_g75k4"]
+[ext_resource type="Script" path="res://src/resources/totem.gd" id="2_oh5hc"]
+
+[resource]
+script = ExtResource("2_oh5hc")
+name = "Air Totem"
+type = 1
+image = ExtResource("1_g75k4")

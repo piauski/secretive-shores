@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerResource" load_steps=3 format=3 uid="uid://b5oe6f1s8e0kv"]
+
+[ext_resource type="Texture2D" uid="uid://cgcvb1csnh6ih" path="res://assets/player/navigator.png" id="1_vl28c"]
+[ext_resource type="Script" path="res://src/resources/player.gd" id="2_kas0g"]
+
+[resource]
+script = ExtResource("2_kas0g")
+name = "Navigator"
+clazz = 3
+image = ExtResource("1_vl28c")
