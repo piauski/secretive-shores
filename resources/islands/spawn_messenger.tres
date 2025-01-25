@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://c0jvr2mjyoy1x"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_3p47m"]
+[ext_resource type="Script" path="res://src/resources/island.gd" id="2_w5nqh"]
+
+[resource]
+script = ExtResource("2_w5nqh")
+name = "Secure Channel"
+type = 1
+image = ExtResource("1_3p47m")
+flooded = false
+always_spawn = true
+spawned_player = 6
+spawned_totem = 0

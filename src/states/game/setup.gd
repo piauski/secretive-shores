@@ -6,6 +6,9 @@ class_name GameSetup
 
 func enter() -> void:
 	board.generate_island()
+	
+func enter_() -> void:
+	board.generate_island()
 	var classes = Classes.Class.duplicate().values()
 	classes.shuffle()
 	var player_classes: Array
@@ -21,4 +24,4 @@ func enter() -> void:
 	for i in range(6):
 		children[i].flooded = true
 	
-	transition("turn")
+	#transition("turn")

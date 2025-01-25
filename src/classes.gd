@@ -1,6 +1,7 @@
 extends Node2D
 
 enum Class {
+	NONE,
 	DIVER,
 	ENGINEER,
 	NAVIGATOR,

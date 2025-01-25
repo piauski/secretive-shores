@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandResource" load_steps=3 format=3 uid="uid://dbnytf72b0feh"]
+
+[ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_usm1a"]
+[ext_resource type="Script" path="res://src/resources/island.gd" id="2_fdpm6"]
+
+[resource]
+script = ExtResource("2_fdpm6")
+name = "Chartered Beacon"
+type = 1
+image = ExtResource("1_usm1a")
+flooded = false
+always_spawn = true
+spawned_player = 3
+spawned_totem = 0

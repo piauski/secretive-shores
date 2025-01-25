@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4e20eam41pd8"]
 
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="1_i0gn1"]
-[ext_resource type="Texture2D" uid="uid://dkmhxktva5il2" path="res://assets/totems/air.png" id="2_l5hvv"]
+[ext_resource type="Texture2D" uid="uid://dkmhxktva5il2" path="res://assets/totem/air.png" id="2_l5hvv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdyhj"]
 shader = ExtResource("1_i0gn1")

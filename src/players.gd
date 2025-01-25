@@ -1,6 +1,7 @@
 extends Node2D
 class_name Players
 
+
 @export var PLAYER_COUNT = 4
 @export var player_scene: PackedScene = preload("res://player.tscn")
 

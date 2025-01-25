@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bbfepm75hksy1"]
 
 [ext_resource type="Texture2D" uid="uid://cmhdrssev5ao5" path="res://icon.svg" id="1_ca4f1"]
-[ext_resource type="Script" path="res://src/island.gd" id="1_kri13"]
+[ext_resource type="Script" path="res://src/island_old.gd" id="1_kri13"]
 [ext_resource type="Texture2D" uid="uid://clx76ip6pwboi" path="res://assets/island/tile_bg.png" id="2_antd8"]
 [ext_resource type="Texture2D" uid="uid://b73qfrqs4mvci" path="res://assets/player/diver.png" id="2_y18hw"]
-[ext_resource type="Texture2D" uid="uid://c804a632eh6sb" path="res://assets/totems/water.png" id="3_mi7t6"]
+[ext_resource type="Texture2D" uid="uid://c804a632eh6sb" path="res://assets/totem/water.png" id="3_mi7t6"]
 [ext_resource type="Shader" path="res://shaders/grayscale.gdshader" id="3_oca5m"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="4_cxsfd"]
 
@@ -28,6 +28,9 @@ shader_parameter/minimal_flickering_alpha = null
 
 [node name="Island" type="Node2D" groups=["Island"]]
 script = ExtResource("1_kri13")
+island_type = null
+island_name = null
+flooded = null
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.8557, 0.855426, 0.86151, 1)

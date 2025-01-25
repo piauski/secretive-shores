@@ -1,74 +1,51 @@
 extends Node2D
 class_name Island
 
-@export var island_type: Tiles.Tile
-@export var island_name: String
+@onready var background_image = $BackgroundImage
+@onready var island_image = $IslandImage
+@onready var player_icon = $PlayerIcon
+@onready var totem_icon = $TotemIcon
+@onready var name_label = $NameLabel
+@onready var area_2d = $Area2D
 
-@onready var Art:Sprite2D = $Art
-@onready var Name:Label = $Name
-@onready var PlayerIcon:Sprite2D = $PlayerIcon
-@onready var TotemIcon:Sprite2D = $TotemIcon
-@onready var Background:Sprite2D = $Background
+var type: Tiles.Tile = Tiles.Tile.NONE
+var flooded: bool = false
+var always_spawn: bool = false
 
-@onready var original_bg_scale = Background.scale
-
-@onready var art_material = Art.material.duplicate()
-
-@export var flooded: bool = false:
-	get:
-		return flooded
+@export var resource: IslandResource:
 	set(value):
-		if value and flooded:
-			remove_self()
-		flooded = value
-		_update_flood_visuals()
+		resource = value
 		
-func _update_flood_visuals():
-	if flooded:
-		Background.texture = load("res://assets/island/tile_bg_flooded.png")
-		art_material.set_shader_parameter("desaturate_amount", 1)
-	else:
-		Background.texture = load("res://assets/island/tile_bg.png")
-		art_material.set_shader_parameter("desaturate_amount", 0)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Name.text = island_name
-	Art.material = art_material
-	var icon = Tiles.tile_data[island_type].icon
-	if icon.begins_with("res://assets/player/"):
-		PlayerIcon.visible = true
-		TotemIcon.visible = false
-		PlayerIcon.texture = load(icon)
-	elif icon.begins_with("res://assets/totems/"):
-		TotemIcon.visible = true
-		PlayerIcon.visible = false
-		TotemIcon.texture = load(icon)
-	else:
-		TotemIcon.visible = false
-		PlayerIcon.visible = false
+	load_resource()
 	
 
+func load_resource():
+	set_name(resource.name)
+	name_label.text = name
+	type = resource.type
+	island_image.texture = resource.image
+	flooded = resource.flooded
+	always_spawn = resource.always_spawn
+
+	# Player Icon
+	if resource.spawned_player != Classes.Class.NONE:
+		player_icon.visible = true
+		player_icon.texture = load("res://assets/player/%s.png" % Classes.Class.keys()[resource.spawned_player].to_lower())
+	else:
+		player_icon.visible = false
+		
+	# Totem Icon
+	if resource.spawned_totem != Totems.Totem.NONE:
+		totem_icon.visible = true
+		totem_icon.texture = load("res://assets/totem/%s.png" % Totems.Totem.keys()[resource.spawned_totem].to_lower())
+	else:
+		totem_icon.visible = false
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
-
-# Called when the island has flooded twice.
-# TODO: game over if any players are here.
-func remove_self():
-	print("DIE")
-	queue_free()
-
-
-func _on_button_pressed() -> void:
-	print("PRESSED ", name)
-
-
-func _on_button_mouse_entered() -> void:
-	Background.scale = original_bg_scale * 1.2
-
-
-func _on_button_mouse_exited() -> void:
-	Background.scale = original_bg_scale 
