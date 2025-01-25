@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Tiles="*res://src/tiles.gd"
 Classes="*res://src/classes.gd"
 Totems="*res://src/totems.gd"
+Util="*res://src/util.gd"
 
 [global_group]
 
