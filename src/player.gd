@@ -3,6 +3,10 @@ class_name Player
 
 @onready var sprite: Sprite2D = $Sprite
 
+signal action
+
+var actions_left: int = 0
+
 @export var resource: PlayerResource = preload("res://resources/player/diver.tres"):
 	set(value):
 		resource = value
@@ -26,3 +30,10 @@ func load_resource(resource: PlayerResource):
 	clazz = resource.clazz
 	special_action = resource.special_action
 	sprite.texture = resource.image
+	
+
+func turn(state: bool) -> void:
+	if state:
+		scale = Vector2(2,2)
+	else:
+		scale = Vector2(1,1)

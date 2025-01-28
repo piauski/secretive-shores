@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqxacn83odu47"]
+[gd_scene load_steps=11 format=3 uid="uid://dqxacn83odu47"]
 
 [ext_resource type="Script" path="res://src/camera_2d.gd" id="2_6e7hi"]
 [ext_resource type="PackedScene" uid="uid://cmakmivbp7n1k" path="res://scenes/board.tscn" id="2_offwo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/states/game/turn_wait.gd" id="7_is55e"]
 [ext_resource type="Texture2D" uid="uid://cgcvb1csnh6ih" path="res://assets/player/navigator.png" id="8_18cu6"]
 [ext_resource type="Script" path="res://src/hud.gd" id="8_q3yuw"]
+[ext_resource type="PackedScene" uid="uid://b2skqwu6gi2u5" path="res://scenes/gui/player_list_entry.tscn" id="10_o5s6g"]
 
 [node name="Game" type="Node2D"]
 
@@ -39,8 +40,10 @@ script = ExtResource("7_is55e")
 board = NodePath("../../Board")
 players = NodePath("../../Players")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("board", "players")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("turn_indicator_player_image", "turn_indicator_player_label", "board", "players")]
 script = ExtResource("8_q3yuw")
+turn_indicator_player_image = NodePath("HUD/TOP_LEFT/TurnIndicator/PlayerImage")
+turn_indicator_player_label = NodePath("HUD/TOP_LEFT/TurnIndicator/PlayerLabel")
 board = NodePath("../Board")
 players = NodePath("../Players")
 
@@ -52,22 +55,62 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TurnIndicator" type="HBoxContainer" parent="CanvasLayer/HUD"]
-layout_mode = 0
-offset_right = 279.0
-offset_bottom = 40.0
+[node name="TOP_LEFT" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 0.5
 
-[node name="PlayerImage" type="TextureRect" parent="CanvasLayer/HUD/TurnIndicator"]
+[node name="TurnIndicator" type="HBoxContainer" parent="CanvasLayer/HUD/TOP_LEFT"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="PlayerImage" type="TextureRect" parent="CanvasLayer/HUD/TOP_LEFT/TurnIndicator"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("8_18cu6")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="PlayerLabel" type="RichTextLabel" parent="CanvasLayer/HUD/TurnIndicator"]
+[node name="PlayerLabel" type="RichTextLabel" parent="CanvasLayer/HUD/TOP_LEFT/TurnIndicator"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 bbcode_enabled = true
 text = "Player's Turn"
 fit_content = true
+
+[node name="TOP_RIGHT" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+
+[node name="BOTTOM_LEFT" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="PlayerList" type="VBoxContainer" parent="CanvasLayer/HUD/BOTTOM_LEFT"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 164.0
+grow_vertical = 2
+
+[node name="PlayerListEntry" parent="CanvasLayer/HUD/BOTTOM_LEFT/PlayerList" instance=ExtResource("10_o5s6g")]
+layout_mode = 2
+
+[node name="BOTTOM_RIGHT" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0

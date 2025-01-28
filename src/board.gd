@@ -29,6 +29,7 @@ const diagonal_offsets: Array = [
 ]
 
 var flood_deck: Array[Island] = []
+var flood_discard: Array[Island] = []
 
 func count_island_tiles() -> int:
 	var count = 0
@@ -102,6 +103,22 @@ func generate_island() -> void:
 		new_totem.resource = totem_resources[i]
 		new_totem.position = totem_positions[i]
 		
+func generate_flood_deck() -> Array[Island]:
+	flood_deck = get_islands().duplicate()
+	flood_deck.shuffle()
+	flood_discard.resize(0)
+	return flood_deck
+	
+func get_flood_next() -> Island:
+	if flood_deck.size() == 0:
+		flood_deck = flood_discard
+		flood_deck.shuffle()
+		flood_discard.resize(0)
+	var island_to_flood = flood_deck.pop_front()
+	flood_discard.append(island_to_flood)
+	return island_to_flood
+
+		
 func get_spawn_tiles_for_class(clazz: Classes.Class) -> Array[Island]:
 	return get_islands().filter(func(island: Island): return island.spawned_player == clazz)
 	
@@ -110,11 +127,9 @@ func get_island_by_row_col(row: int, col: int) -> Island:
 
 func get_adjacent_tiles_for_player(player: Player):
 	var adjacent_tiles: Array[Island] = []
-	var island = player.current_tile
-	print("Island idx ", island.row, " ", island.col)
-	
+	var island = player.current_tile	
 	var offsets = adjacent_offsets.duplicate()
-	print("SPECIAL", player.special_action, Classes.SpecialAction.MOVE_SHORE_UP_DIAG)
+
 	if player.special_action == Classes.SpecialAction.MOVE_SHORE_UP_DIAG:
 		for offset in diagonal_offsets:
 			offsets.append(offset)
@@ -127,9 +142,6 @@ func get_adjacent_tiles_for_player(player: Player):
 			if island_shape[adj_row][adj_col] > 0:
 				adjacent_tiles.append(get_island_by_row_col(adj_row, adj_col))
 	
-	for tile in adjacent_tiles:
-		tile.scale = Vector2(1.5,1.5)
-	
 	return adjacent_tiles
 
 func flood(island: Island, state: bool):
@@ -139,4 +151,4 @@ func flood(island: Island, state: bool):
 	else:
 		island.flooded = state
 		if state:
-			flood_deck.append(island)
+			flood_discard.append(island)

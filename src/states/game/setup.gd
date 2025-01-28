@@ -6,12 +6,12 @@ class_name GameSetup
 
 func enter() -> void:
 	board.generate_island()
+	board.generate_flood_deck()
+	print(board.flood_deck)
 	players.spawn_players(board)
 	
 	# Flood 6 random tiles
-	var islands = board.get_islands()
-	islands.shuffle()
 	for i in range(6):
-		board.flood(islands[i], true)
+		board.flood(board.get_flood_next(), true)
 		
 	transition("turn")

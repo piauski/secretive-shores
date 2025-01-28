@@ -9,7 +9,7 @@ var min_zoom = Vector2(0.5,0.5)
 var max_zoom = Vector2(2.0,2.0)
 
 func _ready():
-	zoom = Vector2(0.5,0.5)
+	zoom = Vector2(2.5,2.5)
 	global_position = Vector2(500,500)
 func _process(delta):
 	if Input.is_action_just_pressed("mouse_right"):
