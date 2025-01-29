@@ -24,3 +24,4 @@ mouse_filter = 2
 bbcode_enabled = true
 text = "Action"
 fit_content = true
+autowrap_mode = 0

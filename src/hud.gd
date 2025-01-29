@@ -40,7 +40,6 @@ func _process(_delta: float) -> void:
 	
 	if should_delete_action_menu:
 		should_delete_action_menu = false
-		print("deleting")
 		action_menu.queue_free()
 		action_menu = null
 		
@@ -74,7 +73,7 @@ func _on_action_entry_pressed(action: ActionMenuEntry):
 		Util.ActionType.CANCEL:
 			should_delete_action_menu = true
 		_:
-			print("ERROR: Unhandled case in _on_action_entry_pressed: ", action_type)
+			printerr("ERROR: Unhandled case in _on_action_entry_pressed: ", action_type)
 
 func spawn_action_menu(island: Island, position: Vector2):
 	if action_menu:
@@ -82,7 +81,7 @@ func spawn_action_menu(island: Island, position: Vector2):
 	action_menu = action_menu_scene.instantiate()
 	action_menu.global_position = Util.world_to_screen_position(camera, position)
 
-	var action_menu_list = action_menu.get_node("VBoxContainer") as VBoxContainer
+	var action_menu_list := action_menu.get_node("VBoxContainer") as VBoxContainer
 	var label_strings: Array[String] = []
 	
 	for action_name in Util.ActionType.keys():
@@ -97,20 +96,23 @@ func spawn_action_menu(island: Island, position: Vector2):
 		
 		var label = new_action.get_node("RichTextLabel") as RichTextLabel
 		var label_text = action_name.capitalize()
-		if action == Util.ActionType.SHORE_UP:
+		if action == Util.ActionType.WALK_HERE or action == Util.ActionType.SHORE_UP:
 			label_text += " [color=#ffff00]%s[/color]" % island.name
 		label.text = label_text
 		label_strings.append(label_text)
 	
 		new_action.pressed.connect(func():
 			should_delete_action_menu = false
-			print("action")
 			_on_action_entry_pressed(new_action))
 		
 		action_menu_list.add_child(new_action)
 		
-	action_menu.custom_minimum_size.y = (label_strings.size()) * hud.get_theme_default_font().get_string_size(label_strings[0]).y + 10
-	action_menu.custom_minimum_size.x = hud.get_theme_default_font().get_string_size(Util.get_longest_string(label_strings)).x + 30
+	action_menu.custom_minimum_size.y = action_menu_list.get_minimum_size().y + 10
+	action_menu.custom_minimum_size.x = hud.get_theme_default_font().get_string_size(
+		Util.get_longest_string(label_strings),
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		hud.get_theme_default_font_size()).x + 20
 	
 	# action_menu.mouse_exited.connect(_on_action_menu_mouse_exited)
 	hud.call_deferred("add_child", action_menu)

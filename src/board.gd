@@ -269,3 +269,5 @@ func shore_up(player: Player, island: Island):
 	flood(island.pos, false)
 	player.actions_left -= 1
 	
+func examine(island: Island):
+	print("TODO: not implemented")
