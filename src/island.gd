@@ -15,6 +15,7 @@ class_name Island
 		load_resource(resource)
 
 var type: Tiles.Tile = Tiles.Tile.NONE
+var players_on: Array[Player] = []
 
 var flooded: bool = false:
 	set(value):
@@ -28,15 +29,19 @@ var spawned_totem: Totems.Totem = Totems.Totem.NONE
 var row: int = 0
 var col: int = 0
 
-func load_resource(resource: IslandResource):
-	set_name(resource.name)
-	name_label.text = resource.name
-	type = resource.type
-	island_image.texture = resource.image
-	flooded = resource.flooded
-	always_spawn = resource.always_spawn
-	spawned_player = resource.spawned_player
-	spawned_totem = resource.spawned_totem
+var pos: Vector2i:
+	get:
+		return Vector2i(row, col)
+
+func load_resource(_resource: IslandResource):
+	set_name(_resource.name)
+	name_label.text = _resource.name
+	type = _resource.type
+	island_image.texture = _resource.image
+	flooded = _resource.flooded
+	always_spawn = _resource.always_spawn
+	spawned_player = _resource.spawned_player
+	spawned_totem = _resource.spawned_totem
 
 	# Flood visuals
 	update_flood_visuals()

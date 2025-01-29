@@ -11,7 +11,8 @@ var max_zoom = Vector2(2.0,2.0)
 func _ready():
 	zoom = Vector2(2.5,2.5)
 	global_position = Vector2(500,500)
-func _process(delta):
+	
+func _process(_delta):
 	if Input.is_action_just_pressed("mouse_right"):
 		dragging = true
 		last_mouse_pos = get_global_mouse_position()

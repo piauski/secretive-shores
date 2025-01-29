@@ -1,5 +1,5 @@
-extends Resource
-class_name PlayerResource
+class_name PlayerResource extends Resource
+
 
 @export var name: String = ""
 @export var clazz: Classes.Class = Classes.Class.NONE

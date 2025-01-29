@@ -11,8 +11,8 @@ class_name Totem
 		
 
 
-func load_resource(resource: TotemResource):
-	set_name(resource.name)
-	type = resource.type
-	image.texture = resource.image
+func load_resource(_resource: TotemResource):
+	set_name(_resource.name)
+	type = _resource.type
+	image.texture = _resource.image
 	

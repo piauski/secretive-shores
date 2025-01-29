@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://beiscudk56rbq"]
+
+[ext_resource type="Script" path="res://src/gui/action_menu_entry.gd" id="1_hof1x"]
+
+[node name="ActionMenuEntry" type="Button"]
+self_modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(52.525, 25)
+offset_right = 8.0
+offset_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+text_overrun_behavior = 3
+script = ExtResource("1_hof1x")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Action"
+fit_content = true
